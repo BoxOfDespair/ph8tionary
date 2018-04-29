@@ -68,10 +68,12 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_framework',
+    'channels',
 ]
 LOCAL_APPS = [
     'ph8tionary.users.apps.UsersConfig',
     # Your stuff: custom apps go here
+    'game'
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -238,3 +240,6 @@ SOCIALACCOUNT_ADAPTER = 'ph8tionary.users.adapters.SocialAccountAdapter'
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+#Django Channels
+ASGI_APPLICATION = 'ph8tionary.routing.application'

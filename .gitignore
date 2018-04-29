@@ -291,3 +291,4 @@ ph8tionary/media/
 
 # Dev tools
 .vscode
+.env
