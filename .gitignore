@@ -294,3 +294,6 @@ ph8tionary/media/
 
 # Local database
 localdb
+
+
+package-lock.json
