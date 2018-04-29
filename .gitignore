@@ -292,3 +292,9 @@ ph8tionary/media/
 # Dev tools
 .vscode
 .env
+
+# Local database
+localdb
+
+
+package-lock.json
