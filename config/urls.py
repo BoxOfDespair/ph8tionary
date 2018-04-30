@@ -5,6 +5,27 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
 
+from rest_framework import views, serializers, status
+from rest_framework.schemas import get_schema_view
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+from rest_framework.response import Response
+
+
+class MessageSerializer(serializers.Serializer):
+    message = serializers.CharField()
+
+
+class EchoView(views.APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = MessageSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        return Response(
+            serializer.data, status=status.HTTP_201_CREATED)
+
+
 urlpatterns = [
     url(r"^$", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     url(
@@ -21,6 +42,12 @@ urlpatterns = [
     ),
     url(r"^accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
+
+                  url(r'^api/$', get_schema_view()),
+                  url(r'^api/auth/', include(
+                      'rest_framework.urls', namespace='rest_framework')),
+                  url(r'^api/auth/token/obtain/$', TokenObtainPairView.as_view()),
+                  url(r'^api/auth/token/refresh/$', TokenRefreshView.as_view()),
 
     # Our Game
     url(
